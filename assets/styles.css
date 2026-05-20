@@ -115,7 +115,7 @@ a {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, rgba(16, 24, 32, 0.86), rgba(16, 24, 32, 0.58) 42%, rgba(16, 24, 32, 0.18));
+  background: linear-gradient(90deg, rgba(16, 24, 32, 0.72), rgba(16, 24, 32, 0.38) 46%, rgba(16, 24, 32, 0.08));
 }
 
 .hero::after {
@@ -134,7 +134,7 @@ a {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center;
+  object-position: center right;
 }
 
 .hero-inner {
