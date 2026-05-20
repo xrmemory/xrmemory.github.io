@@ -157,6 +157,11 @@ h1 {
   font-size: clamp(2.7rem, 8vw, 5.8rem);
 }
 
+.workshop-hero h1 {
+  max-width: 920px;
+  font-size: clamp(2.35rem, 5.6vw, 4.45rem);
+}
+
 h2 {
   margin: 0 0 20px;
   font-size: clamp(1.65rem, 4vw, 2.55rem);
@@ -212,6 +217,48 @@ h3 {
 
 .section.alt {
   background: #f0f4f1;
+}
+
+.key-info {
+  margin-top: -1px;
+  padding: 22px 0;
+  background: var(--graphite);
+  color: white;
+}
+
+.key-info-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.key-info-grid div {
+  padding: 0 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.key-info-grid div:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.key-info-grid span {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.key-info-grid strong {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.key-info a {
+  color: #a9ddd6;
 }
 
 .container {
@@ -323,6 +370,128 @@ h3 {
   font-weight: 850;
 }
 
+.person {
+  min-height: 226px;
+}
+
+.organizer-photo {
+  display: block;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: #edf5f3;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.organizer-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.organizer-role {
+  display: inline-flex;
+  min-height: 0;
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #edf5f3;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.person h3 {
+  margin-bottom: 12px;
+}
+
+.person p + p {
+  margin-top: 4px;
+}
+
+.guidelines {
+  max-width: 860px;
+  margin-top: 28px;
+}
+
+.guidelines p {
+  margin: 0 0 14px;
+}
+
+.guideline-list {
+  display: grid;
+  gap: 10px;
+}
+
+.guideline-list p {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.archive-list {
+  display: grid;
+  gap: 14px;
+}
+
+.archive-entry {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: start;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px rgba(23, 32, 42, 0.05);
+}
+
+.archive-year {
+  color: var(--coral);
+  font-size: 0.86rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.archive-main h2 {
+  margin-bottom: 8px;
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+}
+
+.archive-main > p {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.archive-facts {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.archive-facts div {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 12px;
+}
+
+.archive-facts dt {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.archive-facts dd {
+  margin: 0;
+}
+
 .footer {
   padding: 36px 0;
   background: var(--graphite);
@@ -391,8 +560,16 @@ h3 {
     min-height: 720px;
   }
 
+  .workshop-hero {
+    min-height: 660px;
+  }
+
   .hero-inner {
     padding: 84px 0 96px;
+  }
+
+  .workshop-hero h1 {
+    font-size: clamp(2.15rem, 10vw, 3.2rem);
   }
 
   .intro-grid,
@@ -400,8 +577,20 @@ h3 {
   .archive-grid,
   .organizer-grid,
   .deadline-grid,
+  .key-info-grid,
+  .archive-entry,
   .schedule-item {
     grid-template-columns: 1fr;
+  }
+
+  .key-info-grid div {
+    padding: 0;
+    border-left: 0;
+  }
+
+  .archive-facts div {
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
 
   .section {
