@@ -272,6 +272,12 @@ h3 {
   gap: 16px;
 }
 
+.paper-type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
 .topic,
 .archive-card,
 .person,
@@ -553,6 +559,7 @@ h3 {
 
   .intro-grid,
   .topic-grid,
+  .paper-type-grid,
   .archive-grid,
   .organizer-grid,
   .deadline-grid,
