@@ -291,6 +291,7 @@ h3 {
 .topic,
 .archive-card,
 .person,
+.committee-member,
 .deadline,
 .schedule-item {
   background: var(--panel);
@@ -302,7 +303,8 @@ h3 {
 
 .topic p,
 .archive-card p,
-.person p {
+.person p,
+.committee-member p {
   margin: 0;
   color: var(--muted);
 }
@@ -390,6 +392,20 @@ h3 {
 
 .person-info p + p {
   margin-top: 4px;
+}
+
+.committee-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.committee-member {
+  min-height: 112px;
+}
+
+.committee-member h3 {
+  margin-bottom: 10px;
 }
 
 .submission-panel {
@@ -572,6 +588,7 @@ h3 {
   .paper-type-grid,
   .archive-grid,
   .organizer-grid,
+  .committee-grid,
   .deadline-grid,
   .archive-entry,
   .submission-details,
