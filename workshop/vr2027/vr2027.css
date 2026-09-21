@@ -7,9 +7,9 @@
 .proposal-banner .container { display: flex; gap: 10px 24px; flex-wrap: wrap; }
 .vr2027 .workshop-hero { min-height: 700px; }
 .vr2027 .hero-inner { padding: 76px 0 94px; }
-.vr2027 .workshop-hero h1 { font-size: clamp(3rem, 6.7vw, 5.5rem); max-width: 780px; }
+.vr2027 .workshop-hero h1 { font-size: clamp(3rem, 6.7vw, 5.5rem); max-width: 640px; }
 .vr2027 .hero-subtitle { max-width: 600px; margin: 24px 0 0; font-size: 1.18rem; font-weight: 650; }
-.vr2027 .hero-copy { max-width: 660px; margin-top: 16px; }
+.vr2027 .hero-copy { max-width: 570px; margin-top: 16px; color: #f0f5f4; }
 .hero-date { margin-top: 22px; font-weight: 700; }
 .hero-date span { font-weight: 400; font-size: .92rem; color: #d1dcd9; }
 .section-nav { background: #edf5f3; border-bottom: 1px solid var(--line); }
@@ -50,11 +50,15 @@
 .vr2027 .person p { font-size: .9rem; }
 .vr2027 .person .role { margin-bottom: 8px; color: #804330; font-weight: 650; }
 .vr2027 .person strong { color: var(--graphite); }
-.photo-credit { font-size: .8rem; color: var(--muted); margin-top: 22px; max-width: 850px; }
 @media (max-width: 820px) {
   .vr2027 .workshop-hero { min-height: auto; }
   .vr2027 .hero-inner { padding: 58px 0 72px; }
-  .vr2027 .hero::before { background: linear-gradient(90deg,rgba(16,24,32,.94),rgba(16,24,32,.67)); }
+   .vr2027 .hero::before, .vr2027 .hero::after { display: none; }
+  .vr2027 .hero { display: flex; flex-direction: column; background: #143332; }
+  .vr2027 .hero-bg { position: static; width: 100%; height: auto; aspect-ratio: 1672 / 941; object-fit: contain; }
+  .vr2027 .hero-inner { padding: 34px 0 44px; }
+  .vr2027 .workshop-hero h1 { font-size: clamp(2.5rem, 9vw, 3.3rem); }
+  .vr2027 .hero-subtitle { font-size: 1.08rem; }
   .proposal-banner .container { gap: 3px; }
   .proposal-banner span { display: block; }
   .journey-grid, .vr2027 .organizer-grid { grid-template-columns: 1fr; }
@@ -67,3 +71,11 @@
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 .vr2027 .hero::after { height: 64px; }
+@media (min-width: 821px) {
+  .vr2027 .hero::before { background: linear-gradient(90deg, rgba(10,31,31,.96) 0%, rgba(10,31,31,.9) 32%, rgba(10,31,31,.78) 48%, rgba(10,31,31,.35) 65%, rgba(10,31,31,.04) 85%); }
+  .vr2027 .hero-bg { object-position: center right; }
+}
+.vr2027 .hero .button { background: #0b655e; }
+.vr2027 .hero .button:hover { background: #074f49; }
+.vr2027 .hero .button.secondary { background: rgba(16,43,42,.88); border-color: #a6c9c3; }
+.vr2027 .hero .button.secondary:hover { background: #214b47; }

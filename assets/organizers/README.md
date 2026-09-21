@@ -28,5 +28,5 @@ The fifth-workshop page reuses the existing portraits of Dooyoung Kim, Woontack 
 
 - `kiyoung_kim.jpg`: original portrait downloaded from the user-supplied [KAIST ARRC profile](https://arrc.kaist.ac.kr/members/kiyoung-kim) on 2026-09-21.
 - Direct source: https://arrc.kaist.ac.kr/assets/members/photos/kiyoung-kim.jpg
-- Image credited on the page to KAIST Augmented Reality Research Center. The source publishes no explicit open reuse license.
-- `../xrmemory-hero.png` is reused as the series illustration and sharing image; it is not a photograph of the planned event.
+- Photo source: KAIST Augmented Reality Research Center. The source publishes no explicit open reuse license. Attribution records are maintained here.
+- The fifth workshop uses `../xrmemory-hero-vr2027.png`, a generated concept illustration of AR viewers interacting with reconstructed memory participants. The other series pages retain `../xrmemory-hero.png`. These are illustrations, not photographs of the planned event.
