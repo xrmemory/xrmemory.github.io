@@ -1,0 +1,69 @@
+.vr2027 { scroll-padding-top: 90px; }
+.vr2027 section[id] { scroll-margin-top: 90px; }
+.vr2027 .skip-link { position: absolute; top: -80px; left: 16px; z-index: 30; background: white; padding: 12px; }
+.vr2027 .skip-link:focus { top: 8px; }
+.vr2027 :focus-visible { outline: 3px solid #c6533d; outline-offset: 4px; }
+.proposal-banner { background: #fff2d8; color: #49391d; border-bottom: 1px solid #e1c58b; padding: 12px 0; font-size: .92rem; }
+.proposal-banner .container { display: flex; gap: 10px 24px; flex-wrap: wrap; }
+.vr2027 .workshop-hero { min-height: 700px; }
+.vr2027 .hero-inner { padding: 76px 0 94px; }
+.vr2027 .workshop-hero h1 { font-size: clamp(3rem, 6.7vw, 5.5rem); max-width: 780px; }
+.vr2027 .hero-subtitle { max-width: 600px; margin: 24px 0 0; font-size: 1.18rem; font-weight: 650; }
+.vr2027 .hero-copy { max-width: 660px; margin-top: 16px; }
+.hero-date { margin-top: 22px; font-weight: 700; }
+.hero-date span { font-weight: 400; font-size: .92rem; color: #d1dcd9; }
+.section-nav { background: #edf5f3; border-bottom: 1px solid var(--line); }
+.section-nav .container { display: flex; gap: 12px 28px; flex-wrap: wrap; padding: 18px 0; }
+.section-nav a { color: #18534e; font-weight: 700; text-decoration: none; font-size: .94rem; }
+.section-nav a:hover { text-decoration: underline; }
+.section-label { color: #0c6861; font-weight: 800; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 16px; }
+.section-intro { max-width: 820px; font-size: 1.1rem; margin: 0 0 28px; color: var(--muted); }
+.outcome-panel { background: #edf5f3; border-top: 4px solid var(--teal); padding: 30px; }
+.outcome-panel h3 { font-size: 1.5rem; line-height: 1.25; }
+.outcome-panel ol { padding-left: 22px; margin-bottom: 0; }
+.outcome-panel li { padding: 10px 0 10px 7px; }
+.outcome-panel li::marker { color: var(--teal); font-weight: 800; }
+.outcome-panel li span { display: block; color: var(--muted); font-size: .95rem; margin-top: 4px; }
+.journey-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; margin: 34px 0; }
+.journey-grid article { border-top: 1px solid #aac6be; padding-top: 20px; }
+.step-number { font-size: 2.6rem; color: #347d70; font-weight: 300; display: block; margin-bottom: 16px; }
+.journey-grid h3 { font-size: 1.22rem; }
+.journey-grid p { color: var(--muted); }
+.continuity-note { border-left: 3px solid var(--teal); padding-left: 20px; max-width: 940px; }
+.format-stat { padding: 18px 24px; background: #edf5f3; border-left: 4px solid var(--teal); display: flex; gap: 8px 24px; flex-wrap: wrap; }
+.format-stat strong { color: #075f58; }
+.agenda { border-top: 1px solid var(--line); margin-top: 30px; }
+.agenda > div { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.agenda > div > span { color: #9d422f; font-weight: 750; font-variant-numeric: tabular-nums; }
+.agenda p { margin: 5px 0 0; color: var(--muted); }
+.agenda h3 { margin: 0; line-height: 1.35; }
+.topics { margin: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; }
+.topics summary { cursor: pointer; font-weight: 750; font-size: 1.08rem; }
+.topics li { margin: 0 0 10px; break-inside: avoid; }
+.vr2027 .deadline small { display: block; color: #536171; margin-bottom: 12px; font-weight: 650; }
+.vr2027 .deadline strong { color: #a44532; font-size: 1.22rem; margin-bottom: 6px; }
+.workshop-date { margin-top: 26px; }
+.vr2027 .organizer-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+.vr2027 .person { align-items: start; padding: 25px; grid-template-columns: 112px minmax(0,1fr); }
+.vr2027 .person h3 { font-size: 1.15rem; margin: 2px 0 10px; }
+.vr2027 .person h3 a { color: #174d47; }
+.vr2027 .person p { font-size: .9rem; }
+.vr2027 .person .role { margin-bottom: 8px; color: #804330; font-weight: 650; }
+.vr2027 .person strong { color: var(--graphite); }
+.photo-credit { font-size: .8rem; color: var(--muted); margin-top: 22px; max-width: 850px; }
+@media (max-width: 820px) {
+  .vr2027 .workshop-hero { min-height: auto; }
+  .vr2027 .hero-inner { padding: 58px 0 72px; }
+  .vr2027 .hero::before { background: linear-gradient(90deg,rgba(16,24,32,.94),rgba(16,24,32,.67)); }
+  .proposal-banner .container { gap: 3px; }
+  .proposal-banner span { display: block; }
+  .journey-grid, .vr2027 .organizer-grid { grid-template-columns: 1fr; }
+  .journey-grid { gap: 20px; }
+  .step-number { font-size: 2rem; margin-bottom: 12px; }
+  .vr2027 .person { grid-template-columns: 88px minmax(0,1fr); padding: 20px; gap: 16px; }
+  .agenda > div { grid-template-columns: 1fr; gap: 6px; }
+  .outcome-panel { padding: 25px; }
+  .section-nav .container { gap: 12px 22px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.vr2027 .hero::after { height: 64px; }
