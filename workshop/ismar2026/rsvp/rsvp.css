@@ -47,6 +47,12 @@
   margin-top: 18px;
 }
 
+.rsvp-intro-actions .button.secondary {
+  color: #075f58;
+  border-color: var(--teal);
+  background: transparent;
+}
+
 .rsvp-form-section {
   padding-top: 26px;
   padding-bottom: 44px;
