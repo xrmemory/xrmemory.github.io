@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const API = 'https://xrmemory-ismar2026-groups.banana960521.chatgpt.site/api/choices';
+  const SERVICE = new URL(API).origin;
   const STORAGE = 'xrmemory-ismar2026-choice';
   const faces = ['🐱', '🐻', '🐼', '🐰', '🦊', '🐸'];
   const topics = [
@@ -18,6 +19,12 @@
     return node;
   };
   let members = [], counts = null, mine = null, selected = null;
+  let refreshTimer = null, failures = 0;
+  function scheduleRefresh() {
+    clearTimeout(refreshTimer);
+    if (document.hidden || busy || pendingLoad) return;
+    refreshTimer = setTimeout(load, Math.min(60000, 10000 * 2 ** failures));
+  }
   let busy = false, initialized = false, requestVersion = 0, pendingLoad = false, identity = null;
   try { identity = localStorage.getItem(STORAGE); } catch (_) { /* Read-only room remains available. */ }
   if (identity && !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(identity)) identity = null;
@@ -100,7 +107,17 @@
     renderSelection();
   }
   function apply(data) {members = data.members; counts = data.counts; mine = data.mine; renderRoom();}
-  function error(message = '') {$('error').textContent = message; $('error').hidden = !message;}
+  function error(message = '') {
+    $('error').textContent = message;
+    $('error').hidden = !message;
+    $('connection-status').textContent = message ? (counts === null ? 'The room could not connect. Retrying automatically…' : 'Reconnecting. The last room update is shown below.') : '';
+    $('connection-status').hidden = !message;
+    $('connection-help').hidden = !message;
+    if (message && counts === null) {
+      tables.forEach(({desk}) => {desk.querySelector('small').textContent = 'Reconnecting…';});
+      $('room').setAttribute('aria-busy', 'false');
+    }
+  }
   function ensureIdentity() {
     if (!identity) {
       const generated = crypto.randomUUID();
@@ -111,20 +128,79 @@
     }
     return identity;
   }
-  async function request(method = 'GET', body) {
+  let transport = 'direct', bridgeReady = null, bridgeFrame = null;
+  const bridgePending = new Map();
+  let bridgeResolve;
+  window.addEventListener('message', event => {
+    if (event.origin !== SERVICE || event.source !== bridgeFrame?.contentWindow) return;
+    const d = event.data;
+    if (!d || d.channel !== 'xrmemory-room-v1') return;
+    if (d.type === 'ready') {bridgeResolve?.(); return;}
+    if (d.type !== 'response') return;
+    const pending = bridgePending.get(d.id);
+    if (pending) {bridgePending.delete(d.id);clearTimeout(pending.timeout);pending.resolve(d);}
+  });
+  function connectBridge() {
+    if (bridgeReady) return bridgeReady;
+    bridgeReady = new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        bridgeReady = null; bridgeFrame?.remove(); bridgeFrame = null;
+        reject(Error('The room connection is unavailable. Please try the direct room link below.'));
+      }, 12000);
+      bridgeResolve = () => {clearTimeout(timer);resolve();};
+      bridgeFrame = document.createElement('iframe');
+      bridgeFrame.title = 'Discussion room connection';
+      bridgeFrame.hidden = true;
+      bridgeFrame.src = SERVICE + '/room-bridge';
+      bridgeFrame.addEventListener('load', () => {
+        bridgeFrame.contentWindow.postMessage({channel:'xrmemory-room-v1',type:'hello'}, SERVICE);
+      });
+      document.body.append(bridgeFrame);
+    });
+    return bridgeReady;
+  }
+  async function bridgeRequest(method, body) {
+    await connectBridge();
+    return new Promise((resolve, reject) => {
+      const id = crypto.randomUUID();
+      const timeout = setTimeout(() => {bridgePending.delete(id);reject(Error('The room did not respond. Please try again.'));}, 12000);
+      bridgePending.set(id, {resolve, timeout});
+      bridgeFrame.contentWindow.postMessage({channel:'xrmemory-room-v1',type:'request',id,method,identity,body}, SERVICE);
+    });
+  }
+  async function directRequest(method, body) {
     const headers = {};
     if (identity) headers.Authorization = `Bearer ${identity}`;
     if (body) headers['Content-Type'] = 'application/json';
-    const response = await fetch(API, {method, headers, cache: 'no-store', credentials: 'omit', signal: AbortSignal.timeout(15000), ...(body ? {body: JSON.stringify(body)} : {})});
-    let data;
-    try {data = await response.json();} catch (_) {throw Error('The room is temporarily unavailable. Please try again.');}
-    if (!response.ok) throw Error(data.error || 'The room is temporarily unavailable. Please try again.');
-    if (!Array.isArray(data.members) || !Array.isArray(data.counts)) throw Error('Could not load the room. Please try again.');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 7000);
+    try {
+      // The server sends no-store. Avoid Safari-specific cache/preflight headers.
+      const response = await fetch(API, {method, headers, credentials: 'omit', signal: controller.signal, ...(body ? {body: JSON.stringify(body)} : {})});
+      return {status: response.status, data: await response.json()};
+    } finally {clearTimeout(timeout);}
+  }
+  async function request(method = 'GET', body) {
+    let response;
+    if (transport === 'bridge') response = await bridgeRequest(method, body);
+    else {
+      try {response = await directRequest(method, body);}
+      catch (_) {
+        $('connection-status').textContent = 'Connecting to the room…';
+        $('connection-status').hidden = false;
+        response = await bridgeRequest(method, body);
+        transport = 'bridge';
+      }
+    }
+    const data = response.data;
+    if (response.status < 200 || response.status >= 300) throw Error(data?.error || 'The room is temporarily unavailable. Please try again.');
+    if (!Array.isArray(data?.members) || !Array.isArray(data?.counts)) throw Error('Could not load the room. Please try again.');
     return data;
   }
   async function load() {
     if (busy || pendingLoad) return;
     pendingLoad = true;
+    clearTimeout(refreshTimer);
     const version = requestVersion;
     try {
       const data = await request();
@@ -134,22 +210,23 @@
         if (data.mine) { $('display-name').value = data.mine.name; selected = data.mine.topic; }
       }
       apply(data);
+      failures = 0;
       error();
-    } catch (e) {if (version === requestVersion) error(e.message || 'Could not load the room.');}
-    finally {pendingLoad = false;}
+    } catch (e) {if (version === requestVersion) {failures = Math.min(3, failures + 1);error(e.message || 'Could not load the room.');}}
+    finally {pendingLoad = false;scheduleRefresh();}
   }
   async function save(remove = false) {
     if (busy || (!remove && (!selected || !$('display-name').value.trim()))) return;
-    busy = true; requestVersion++; renderSelection(); error(); $('message').textContent = '';
+    busy = true; clearTimeout(refreshTimer); requestVersion++; renderSelection(); error(); $('message').textContent = '';
     try {
       ensureIdentity();
       const data = await request(remove ? 'DELETE' : 'POST', remove ? undefined : {topic: selected, name: $('display-name').value});
       if (!remove && !data.mine) throw Error('Your place was not saved. Please try again.');
-      apply(data);
+      apply(data); failures = 0; error();
       if (data.mine) $('display-name').value = data.mine.name;
       $('message').textContent = remove ? 'You have left the table.' : `You are at Table ${data.mine.topic}. Your character and name are now on the room map.`;
     } catch (e) {error(e.message || 'Your place was not saved. Please try again.');}
-    finally {busy = false; renderSelection();}
+    finally {busy = false; renderSelection(); scheduleRefresh();}
   }
   $('join').addEventListener('submit', event => {event.preventDefault(); save();});
   $('display-name').addEventListener('input', renderSelection);
@@ -158,7 +235,6 @@
   window.addEventListener('storage', event => {
     if (event.key === STORAGE) {identity = event.newValue; initialized = false; requestVersion++; load();}
   });
-  document.addEventListener('visibilitychange', () => {if (!document.hidden) load();});
+  document.addEventListener('visibilitychange', () => {clearTimeout(refreshTimer);if (!document.hidden) load();});
   renderRoom(); load();
-  setInterval(() => {if (!document.hidden) load();}, 3000);
 })();

@@ -7,7 +7,7 @@
   <meta name="description" content="Choose your discussion table for the 4th XRMemory workshop at IEEE ISMAR 2026. 6 October, Sezione 6+7.">
   <link rel="canonical" href="https://xrmemory.org/workshop/ismar2026/groups/">
   <link rel="stylesheet" href="../../../assets/styles.css">
-  <link rel="stylesheet" href="groups.css">
+  <link rel="stylesheet" href="groups.css?v=20261004-connection">
 </head>
 <body>
   <header class="site-header">
@@ -34,6 +34,8 @@
     <section aria-label="Room layout" class="room-section">
       <div class="screen">PRESENTATION SCREEN / FRONT WALL</div>
       <p class="orientation">Facing the screen: Tables 1 and 2 are in the front row.</p>
+      <p id="connection-status" class="connection-status" role="status" hidden></p>
+      <p id="connection-help" class="connection-help" hidden>If this browser cannot connect, <a href="https://xrmemory-ismar2026-groups.banana960521.chatgpt.site/" target="_blank" rel="noopener">open the discussion room directly</a>. It shows the same tables and participants.</p>
       <div id="room" class="room" aria-busy="true"></div>
       <p class="map-note">Each table starts with 8 places and can accommodate up to 12 people. Additional participants appear below the table. Organizers may balance the groups.</p>
     </section>
@@ -58,13 +60,13 @@
     </aside>
     <footer class="group-footer">
       <p>No sign-in or email required. Use the same browser to change your name, move tables or leave. Please avoid joining again from another device.</p>
-      <p>The map updates every 3 seconds. Table positions follow the planned 2 × 2 layout. This is not workshop registration.</p>
+      <p>The map updates automatically about every 10 seconds. Table positions follow the planned 2 × 2 layout. This is not workshop registration.</p>
       <p>Already joined through the earlier link? <a href="https://xrmemory-ismar2026-groups.banana960521.chatgpt.site/" target="_blank" rel="noopener">Manage your existing place there</a> to avoid reserving twice. Both pages share the same room.</p>
       <a href="../#program">Workshop programme</a>
     </footer>
     <noscript><p>Please enable JavaScript to see the live room and select a table.</p></noscript>
   </main>
   <script src="../../../assets/site.js"></script>
-  <script src="groups.js"></script>
+  <script src="groups.js?v=20261004-connection"></script>
 </body>
 </html>
