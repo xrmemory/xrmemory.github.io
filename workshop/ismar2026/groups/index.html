@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Discussion Groups | XRMemory at IEEE ISMAR 2026</title>
+  <meta name="description" content="Choose your discussion table for the 4th XRMemory workshop at IEEE ISMAR 2026. 6 October, Sezione 6+7.">
+  <link rel="canonical" href="https://xrmemory.org/workshop/ismar2026/groups/">
+  <link rel="stylesheet" href="../../../assets/styles.css">
+  <link rel="stylesheet" href="groups.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"></span><span>XRMemory</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false">Menu</button>
+      <div class="nav-links">
+        <a href="../../../">Home</a>
+        <a href="../">ISMAR 2026</a>
+        <a href="./" aria-current="page">Discussion Groups</a>
+        <a href="../rsvp/">RSVP</a>
+        <a href="../../../archive/">Archive</a>
+        <a href="mailto:dooyoung.me@gmail.com">Contact</a>
+      </div>
+    </nav>
+  </header>
+  <main class="groups-main">
+    <section class="intro">
+      <p class="session-meta">IEEE ISMAR 2026 · 6 October · Sezione 6+7</p>
+      <h1>Find your discussion table</h1>
+      <p>Choose a topic, add your name and take a seat. The map follows the room layout, with the presentation screen at the top.</p>
+      <a class="jump-link" href="#join">Choose my table ↓</a>
+    </section>
+    <section aria-label="Room layout" class="room-section">
+      <div class="screen">PRESENTATION SCREEN / FRONT WALL</div>
+      <p class="orientation">Facing the screen: Tables 1 and 2 are in the front row.</p>
+      <div id="room" class="room" aria-busy="true"></div>
+      <p class="map-note">Each table starts with 8 places and can accommodate up to 12 people. Additional participants appear below the table. Organizers may balance the groups.</p>
+    </section>
+    <form id="join">
+      <h2 id="form-title">Join a table</h2>
+      <label class="name-label" for="display-name">Name or nickname</label>
+      <input id="display-name" class="name-input" maxlength="24" autocomplete="given-name" placeholder="How should we call you?" required aria-describedby="name-visibility">
+      <p id="name-visibility" class="hint">Your character is assigned at random when you join. Your name and character will be visible to anyone visiting this page.</p>
+      <fieldset><legend>Your discussion topic</legend><div id="topic-options" class="topic-options"></div></fieldset>
+      <div class="actions">
+        <button id="save" disabled type="submit">Take my seat</button>
+        <button id="leave" class="quiet" type="button" hidden>Leave this table</button>
+        <button id="refresh" class="quiet" type="button">Refresh room</button>
+      </div>
+      <p id="message" role="status" class="message"></p>
+      <p id="error" role="alert" class="error" hidden></p>
+    </form>
+    <aside class="report">
+      <h2>One short report per group</h2>
+      <p>Bring examples from the papers, today’s talks or your own research. An organizer will help each table.</p>
+      <div class="outputs"><span>Key considerations</span><span>Current capabilities and limitations</span><span>Future directions</span></div>
+    </aside>
+    <footer class="group-footer">
+      <p>No sign-in or email required. Use the same browser to change your name, move tables or leave. Please avoid joining again from another device.</p>
+      <p>The map updates every 3 seconds. Table positions follow the planned 2 × 2 layout. This is not workshop registration.</p>
+      <p>Already joined through the earlier link? <a href="https://xrmemory-ismar2026-groups.banana960521.chatgpt.site/" target="_blank" rel="noopener">Manage your existing place there</a> to avoid reserving twice. Both pages share the same room.</p>
+      <a href="../#program">Workshop programme</a>
+    </footer>
+    <noscript><p>Please enable JavaScript to see the live room and select a table.</p></noscript>
+  </main>
+  <script src="../../../assets/site.js"></script>
+  <script src="groups.js"></script>
+</body>
+</html>
