@@ -620,3 +620,18 @@ h3 {
     padding: 52px 0;
   }
 }
+
+/* Public edition status and links back from archived workshops. */
+.event-banner {
+  background: #e5f1e9;
+  color: #224d3f;
+  border-bottom: 1px solid #b8d5c7;
+  padding: 14px 0;
+  font-size: .94rem;
+}
+.event-banner .container { display: flex; gap: 6px 24px; flex-wrap: wrap; }
+.event-banner a { color: #18534e; }
+.archive-banner { background: #f5eee0; color: #58492d; border-color: #dacbb0; }
+@media (max-width: 820px) {
+  .event-banner .container { flex-direction: column; gap: 2px; }
+}
